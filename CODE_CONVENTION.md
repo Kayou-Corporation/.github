@@ -2,8 +2,10 @@
 
 > This document defines the coding standards for all Kayou Corporation projects (KEngine, KAlloc, KThreads).  
 > Feel free to edit any section to match your team's preferences.
+<br/>
 
 ---
+<br/>
 
 ## Table of Contents
 
@@ -21,8 +23,10 @@
 12. [Comments & Documentation](#12-comments--documentation)
 13. [Includes & Modules](#13-includes--modules)
 14. [Vulkan-Specific Guidelines](#14-vulkan-specific-guidelines)
+<br/>
 
 ---
+<br/>
 
 ## 1. General Philosophy
 
@@ -30,8 +34,10 @@
 - **Zero-overhead abstractions.** Prefer compile-time solutions over runtime indirection wherever possible.
 - **Explicit is better than implicit.** Avoid surprising behavior; mark conversions and copies explicitly.
 - **Modern C++23.** Use the latest standard features but only when they improve readability or performance, not for novelty.
+<br/>
 
 ---
+<br/>
 
 ## 2. File Organization
 
@@ -53,8 +59,10 @@ KEngine/
     ├── Core/
     └── Renderer/
 ```
+<br/>
 
 ---
+<br/>
 
 ## 3. Naming Conventions
 
@@ -69,6 +77,7 @@ namespace Kayou::Memory { }
 Put as little code as possible inside the `Kayou` namespace. Prefer nesting with a sub-namespace (e.g. `Kayou::Renderer` for rendering) <br/>
 When using namespaces in sub-project, use the main-project name + sub-project name (e.g. `Kayou::Memory`) <br/>
 Use `PascalCase` for namespaces. Avoid deeply nested namespaces (max 4 levels).
+<br/>
 
 ### Classes & Structs
 
@@ -126,9 +135,12 @@ Use `PascalCase` for public methods. Use `PascalCase` for file-scope static help
 #define KA_ALIGN(x, alignment)
 ```
 
+<br/>
 Minimize macro usage; prefer `constexpr`, `inline`, and templates.
+<br/><br/>
 
 ---
+<br/>
 
 ## 4. Formatting & Style
 
@@ -149,8 +161,10 @@ else
 
 - **Spaces around operators:** `a + b`, `a == b`, `a && b`.
 - **No trailing whitespace.**
+<br/>
 
 ---
+<br/>
 
 ## 5. Classes & Structs
 
@@ -179,8 +193,10 @@ private:
     VkPhysicalDevice m_physDevice = VK_NULL_HANDLE;
 };
 ```
+<br/>
 
 ---
+<br/>
 
 ## 6. Functions & Methods
 
@@ -195,8 +211,10 @@ private:
 - Pass by `const&` for non-trivial read-only inputs; pass by value when the function needs a copy.
 - Return by value; rely on NRVO/copy-elision.
 - Avoid output parameters; prefer returning `std::expected` or a struct.
+<br/>
 
 ---
+<br/>
 
 ## 7. Variables & Constants
 
@@ -210,8 +228,10 @@ constexpr uint32_t k_MAX_FRAMES_IN_FLIGHT = 3;
 auto device = CreateDevice(info);          // WRONG — Even though the type is clear, explicit types makes code easily readable
 uint32_t frameIndex = GetCurrentFrame();   // OK — always use explicit when possible
 ```
+<br/>
 
 ---
+<br/>
 
 ## 8. Memory Management
 
@@ -230,8 +250,10 @@ std::unique_ptr<Buffer> m_vertexBuffer;
 // Non-owning observer
 RenderDevice* m_device = nullptr;  // not owned — lifetime managed by Engine
 ```
+<br/>
 
 ---
+<br/>
 
 ## 9. Templates & Concepts
 
@@ -252,8 +274,10 @@ class Pool { ... };
 - Prefer `if constexpr` over template specialization for small branches.
 - Keep template definitions in `.hpp` files.
 - Avoid `.inl` files as they have no real benefits (in my opinion).
+<br/>
 
 ---
+<br/>
 
 ## 10. Error Handling
 
@@ -275,8 +299,10 @@ if (!result)
 ```
 
 - Define a project-wide `Error` enum or error-code type per subsystem.
+<br/>
 
 ---
+<br/>
 
 ## 11. Threading
 
@@ -291,8 +317,10 @@ if (!result)
 /// Thread-safe — may be called from any worker thread.
 void SubmitRenderPacket(RenderPacket packet);
 ```
+<br/>
 
 ---
+<br/>
 
 ## 12. Comments & Documentation
 
@@ -307,8 +335,10 @@ void SubmitRenderPacket(RenderPacket packet);
 /// @return Pointer to the allocated block, or nullptr on failure.
 [[nodiscard]] void* Allocate(std::size_t size, std::size_t alignment) noexcept;
 ```
+<br/>
 
 ---
+<br/>
 
 ## 13. Includes & Modules
 
@@ -333,8 +363,10 @@ void SubmitRenderPacket(RenderPacket packet);
 #include <cstdint>
 #include <span>
 ```
+<br/>
 
 ---
+<br/>
 
 ## 14. Vulkan-Specific Guidelines
 
