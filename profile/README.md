@@ -25,18 +25,6 @@ KEngine is our main project — a fully custom, 3D game engine written in modern
 
 ---
 
-### 🧠 KAlloc
-> Custom memory allocator library.
-
-KAlloc provides a suite of high-performance, low-level memory allocators tailored for real-time game engine workloads:
-
-- Based on C++23
-- Aligned allocations & allocator-specific strategies (linear, pool, stack)
-- Tracking and debug validation
-- Optional [Tracy](https://github.com/wolfpld/tracy) profiling integration
-
----
-
 ### 🧵 KThreads
 > Custom threading and task system.
 
@@ -49,20 +37,32 @@ KThreads is our multi-threading layer built for deterministic, high-throughput w
 
 ---
 
+### 🧠 KAlloc
+> Custom memory allocator library.
+
+KAlloc provides a suite of high-performance, low-level memory allocators tailored for real-time game engine workloads:
+
+- Based on C++23
+- Aligned allocations & allocator-specific strategies (linear, pool, stack)
+- Tracking and debug validation
+- Optional [Tracy](https://github.com/wolfpld/tracy) profiling integration
+
+---
+
 ## 📐 Code Convention
 
-All Kayou Corporation projects follow a unified C++23 code convention.  
+All Kayou Corporation projects follow our unified C++23 code convention.  
 → See [`CODE_CONVENTION.md`](../CODE_CONVENTION.md) for the full reference.
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions from the community!  
-Please read [`CONTRIBUTING.md`](../CONTRIBUTING.md) before opening a pull request.
+We welcome any contribution and would be more than happy to discuss our project with anyone willing to!  
+If you wish to contribute, please read [`CONTRIBUTING.md`](../CONTRIBUTING.md) before opening a pull request.
 
 ---
 
 <div align="center">
-  <sub>Built with ❤️ by the Kayou Corporation team.</sub>
+  <sub>Built with ❤️ for the Kayou.</sub>
 </div>
