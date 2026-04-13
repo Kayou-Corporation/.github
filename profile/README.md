@@ -4,9 +4,10 @@
 
 **Building a high-performance, custom 3D game engine from the ground up — powered by C++23 and Vulkan.**
 
-[![Language](https://img.shields.io/badge/language-C%2B%2B23-blue?style=flat-square)](https://en.cppreference.com/w/cpp/23)
-[![Graphics API](https://img.shields.io/badge/graphics-Vulkan-red?style=flat-square)](https://www.vulkan.org/)
-[![License](https://img.shields.io/badge/license-Proprietary-lightgrey?style=flat-square)](#)
+[![Languages](https://img.shields.io/badge/Language-C%2B%2B23-lime?style=for-the-badge&logo=cplusplus)](https://en.cppreference.com/w/cpp/23)
+[![test](https://img.shields.io/badge/language-SLANG-orange?style=for-the-badge)](https://shader-slang.org/)
+[![Graphics API](https://img.shields.io/badge/Graphics-Vulkan-darkred?style=for-the-badge&logo=vulkan)](https://www.vulkan.org/)
+[![License](https://img.shields.io/badge/License-Open_Source-blue?style=for-the-badge)](#)
 
 </div>
 
@@ -14,7 +15,7 @@
 
 ## 🚀 Projects
 
-### 🔧 KEngine
+### 🔧 [KEngine](https://github.com/Kayou-Corporation/KEngine)
 > The core 3D game engine.
 
 KEngine is our main project — a fully custom, 3D game engine written in modern C++23. It is designed with performance, modularity, and multi-API rendering in mind.
@@ -25,7 +26,7 @@ KEngine is our main project — a fully custom, 3D game engine written in modern
 
 ---
 
-### 🧵 KThreads
+### 🧵 [KThreads](https://github.com/Kayou-Corporation/KThreads)
 > Custom threading and task system.
 
 KThreads is our multi-threading layer built for deterministic, high-throughput workloads:
@@ -37,7 +38,7 @@ KThreads is our multi-threading layer built for deterministic, high-throughput w
 
 ---
 
-### 🧠 KAlloc
+### 🧠 [KAlloc](https://github.com/Kayou-Corporation/KAlloc)
 > Custom memory allocator library.
 
 KAlloc provides a suite of high-performance, low-level memory allocators tailored for real-time game engine workloads:
@@ -64,5 +65,9 @@ If you wish to contribute, please read [`CONTRIBUTING.md`](../CONTRIBUTING.md) b
 ---
 
 <div align="center">
+  <sub>As these projects are mainly for learning purposes, we try to avoid the usage of (generative) AI as much as possible.</sub>
+</div>
+<div align="center">
   <sub>Built with ❤️ for the Kayou.</sub>
 </div>
+
