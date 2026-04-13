@@ -368,7 +368,7 @@ vk::Queue         m_queue     = VK_NULL_HANDLE;
 ```
 
 - Destroy resources in the reverse order of creation.
-- Use `vk` (Vulkan-Hpp wrappers) or custom wrappers; never leave raw handles without a destructor.
+- Use `vk::` (Vulkan-Hpp wrappers) or custom wrappers; never leave raw handles without a destructor.
 - Synchronize CPU/GPU using timeline semaphores; avoid binary semaphores when it's possible but feel free to use them.
 
 ---
