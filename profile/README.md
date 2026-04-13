@@ -17,7 +17,7 @@
 ### 🔧 KEngine
 > The core 3D game engine.
 
-KEngine is our flagship project — a fully custom, data-driven 3D game engine written in modern C++23. It is designed with performance, modularity, and multi-API rendering in mind.
+KEngine is our main project — a fully custom, 3D game engine written in modern C++23. It is designed with performance, modularity, and multi-API rendering in mind.
 
 - **Rendering back-end:** Vulkan (DirectX 12 planned)
 - **Architecture:** Entity-Component-System (ECS)
@@ -30,9 +30,10 @@ KEngine is our flagship project — a fully custom, data-driven 3D game engine w
 
 KAlloc provides a suite of high-performance, low-level memory allocators tailored for real-time game engine workloads:
 
-- Pool allocator, stack allocator, free-list allocator
-- NUMA-aware and cache-line-aligned allocations
-- Fully compatible with C++23 allocator concepts and `std::pmr`
+- Based on C++23
+- Aligned allocations & allocator-specific strategies (linear, pool, stack)
+- Tracking and debug validation
+- Optional [Tracy](https://github.com/wolfpld/tracy) profiling integration
 
 ---
 
