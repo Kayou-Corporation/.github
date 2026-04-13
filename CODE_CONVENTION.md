@@ -39,19 +39,17 @@
 |---|---|
 | Header (declarations) | `.hpp` |
 | Source (definitions) | `.cpp` |
-| Inline / template impl | `.inl` |
-| C interface headers | `.h` |
 
 - One class or closely related group of functions per header file.
 - Mirror the directory structure with the namespace hierarchy.
-- Public API headers go in `include/`, private implementation headers in `src/`.
+- Public API headers go in `Include/`, private implementation headers in `Source/`.
 
 ```
 KEngine/
-├── include/
+├── Include/
 │       ├── Core/
 │       └── Renderer/
-└── src/
+└── Source/
     ├── Core/
     └── Renderer/
 ```
@@ -68,7 +66,9 @@ namespace Kayou::Renderer { }
 namespace Kayou::Memory { }
 ```
 
-Use `PascalCase` for namespaces. Avoid deeply nested namespaces (max 3 levels).
+Put as little code as possible inside the `Kayou` namespace. Prefer nesting with a sub-namespace (e.g. `Kayou::Renderer` for rendering) <br/>
+When using namespaces in sub-project, use the main-project name + sub-project name (e.g. `Kayou::Memory`) <br/>
+Use `PascalCase` for namespaces. Avoid deeply nested namespaces (max 4 levels).
 
 ### Classes & Structs
 
@@ -77,7 +77,7 @@ class RenderDevice { };
 struct FrameData { };
 ```
 
-Use `PascalCase`. Prefix engine core classes with nothing; use project prefixes (`KE`, `KA`, `KT`) only when building a public C API.
+Use `PascalCase`. Prefix engine core classes with nothing; use project prefixes (`KE`, `KA`, `KT`) only when building a public API.
 
 ### Interfaces / Abstract Classes
 
@@ -89,7 +89,8 @@ class IAllocator { };
 ### Enumerations
 
 ```cpp
-enum class ShaderStage : uint32_t {
+enum class ShaderStage : uint32_t
+{
     Vertex   = 0,
     Fragment = 1,
     Compute  = 2,
@@ -97,6 +98,7 @@ enum class ShaderStage : uint32_t {
 ```
 
 Use `enum class` (scoped enums) only. Use `PascalCase` for the type and `PascalCase` for values.
+Use explicit enumerator type when possible
 
 ### Functions & Methods
 
@@ -105,7 +107,7 @@ void InitializeDevice();
 uint32_t GetFrameIndex() const;
 ```
 
-Use `PascalCase` for public methods. Use `camelCase` for file-scope static helpers.
+Use `PascalCase` for public methods. Use `PascalCase` for file-scope static helpers and prefix them with `Internal`.
 
 ### Variables
 
@@ -147,16 +149,16 @@ else
 
 - **Spaces around operators:** `a + b`, `a == b`, `a && b`.
 - **No trailing whitespace.**
-- Use a `.clang-format` file (Allman base style) to enforce formatting automatically.
 
 ---
 
 ## 5. Classes & Structs
 
-- Declare `public` members first, then `protected`, then `private`.
+- Declare `public` members first, then `protected`, then `private`. Do not repeat members (Only one `public`, `private` and `protected` member ber class)
 - Use `struct` for plain data holders (POD-like types with no invariants).
 - Use `class` for types that enforce invariants via encapsulation.
 - Always declare a virtual destructor in base classes.
+- Always declare overriden classes as `virtual` and `override` (e.g. `virtual RenderDevice() override`
 - Mark single-argument constructors `explicit` unless implicit conversion is intentional.
 
 ```cpp
@@ -182,8 +184,8 @@ private:
 
 ## 6. Functions & Methods
 
-- Keep functions short and focused (single responsibility).
-- Prefer `[[nodiscard]]` on functions that return error codes or resource handles.
+- Keep functions short and focused (KISS & single responsibility).
+- Prefer `KAYOU_NO_DISCARD` on functions that return error codes or resource handles.
 - Use trailing return types when it improves readability.
 
 ```cpp
@@ -200,13 +202,13 @@ private:
 
 - Always initialize variables at declaration.
 - Use `constexpr` over `const` for compile-time constants.
-- Use `auto` when the type is obvious from the right-hand side; avoid `auto` when it hides important type information.
+- avoid `auto` when possible to improve readability.
 
 ```cpp
 constexpr uint32_t k_MAX_FRAMES_IN_FLIGHT = 3;
 
-auto device = CreateDevice(info);          // OK — type is clear
-uint32_t frameIndex = GetCurrentFrame();   // OK — explicit is clearer here
+auto device = CreateDevice(info);          // WRONG — Even though the type is clear, explicit types makes code easily readable
+uint32_t frameIndex = GetCurrentFrame();   // OK — always use explicit when possible
 ```
 
 ---
@@ -215,7 +217,6 @@ uint32_t frameIndex = GetCurrentFrame();   // OK — explicit is clearer here
 
 - **No raw `new`/`delete`** in engine code. Use KAlloc allocators or `std::pmr`.
 - Prefer stack allocation; heap-allocate only when necessary.
-- Use RAII wrappers for all OS/GPU resources.
 - Smart pointer hierarchy:
   - `std::unique_ptr` — sole ownership (most common).
   - `std::shared_ptr` — shared ownership (use sparingly; prefer handle systems).
@@ -249,7 +250,8 @@ class Pool { ... };
 ```
 
 - Prefer `if constexpr` over template specialization for small branches.
-- Keep template definitions in `.inl` files included at the bottom of the corresponding `.hpp`.
+- Keep template definitions in `.hpp` files.
+- Avoid `.inl` files as they have no real benefits (in my opinion).
 
 ---
 
@@ -258,6 +260,7 @@ class Pool { ... };
 - **No exceptions** in hot paths (rendering loop, allocators, job system).
 - Use `std::expected<T, Error>` (C++23) for fallible operations that return a value.
 - Use assertion macros for programming errors (precondition violations).
+- Use static assertion when it comes to compile-time checks.
 
 ```cpp
 [[nodiscard]] std::expected<Buffer, VkResult> CreateBuffer(const BufferCreateInfo& info);
@@ -293,7 +296,7 @@ void SubmitRenderPacket(RenderPacket packet);
 
 ## 12. Comments & Documentation
 
-- Use `///` Doxygen-style comments for all public API declarations.
+- Use `///` Doxygen-style comments for all public API declarations and multiline comments.
 - Use `//` for inline implementation notes.
 - Do not comment the obvious; explain the *why*, not the *what*.
 
@@ -369,7 +372,7 @@ vk::Queue         m_queue     = VK_NULL_HANDLE;
 
 - Destroy resources in the reverse order of creation.
 - Use `vk::` (Vulkan-Hpp wrappers) or custom wrappers; never leave raw handles without a destructor.
-- Synchronize CPU/GPU using timeline semaphores; avoid binary semaphores when it's possible but feel free to use them.
+- Synchronize CPU/GPU using timeline semaphores; avoid binary semaphores when possible.
 
 ---
 
