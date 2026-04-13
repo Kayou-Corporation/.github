@@ -70,28 +70,28 @@ Use the **Feature Request** issue template. Please describe:
 ## Code Convention
 
 All contributions must follow our [C++23 Code Convention](CODE_CONVENTION.md).  
-Run `clang-format` on your changes before pushing.
+To help, if using Clang, you can run `clang-format` on your changes before pushing.
 
 ---
 
 ## Commit Messages
 
-We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
+We follow our own commits specification:
 
 ```
-<type>(<scope>): <short description>
+[OPTIONAL WIP KEYWORD - ACTION]: <short description>
 
 [optional body]
 
 [optional footer(s)]
 ```
 
-**Types:** `feat`, `fix`, `perf`, `refactor`, `docs`, `test`, `chore`, `ci`
+**Types:** `ADD`, `FIX`, `EDIT`, `REFACTOR`, `WIP`, `DONE`, `UPDATE`, `DOCS`
 
 **Examples:**
 
 ```
-feat(renderer): add Vulkan timeline semaphore support
-fix(kalloc): prevent double-free in pool allocator reset
-docs: update code convention threading section
+[ADD] Vulkan timeline semaphore support
+[WIP - FIX] Prevent double-free in pool allocator reset
+[DOCS] Update code convention threading section
 ```
