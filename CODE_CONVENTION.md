@@ -49,7 +49,6 @@
 ```
 KEngine/
 ├── include/
-│   └── KEngine/
 │       ├── Core/
 │       └── Renderer/
 └── src/
@@ -343,19 +342,26 @@ VkDevice         m_vkDevice     = VK_NULL_HANDLE;
 VkCommandPool    m_vkCmdPool    = VK_NULL_HANDLE;
 ```
 
-- Always check Vulkan return codes; use a `VK_CHECK` macro.
+- Always check Vulkan return codes; use a `VK_CHECK_RESULT` & `VK_CHECK_VOID` macro.
 
 ```cpp
-#define VK_CHECK(expr)                                                   \
+#define VK_CHECK_RESULT(func, expr)                                                   \
     do {                                                                 \
-        VkResult _res = (expr);                                          \
-        KE_ASSERT_MSG(_res == VK_SUCCESS, "Vulkan error: {}", _res);    \
+        auto _res = (func);                                          \
+        KE_ASSERT_MSG(_res.result == vk::Result::eSucess, "Vulkan error: {}", expr);    \
+        return _res.value  \
+    } while (false)
+
+#define VK_CHECK_void(func, expr)                                                   \
+    do {                                                                 \
+        auto _res = (func);                                          \
+        KE_ASSERT_MSG(_res.result == vk::Result::eSucess, "Vulkan error: {}", expr);   \
     } while (false)
 ```
 
 - Destroy resources in the reverse order of creation.
-- Use `vk::raii` (Vulkan-Hpp RAII wrappers) or custom RAII wrappers; never leave raw handles without a destructor.
-- Synchronize CPU/GPU using timeline semaphores; avoid binary semaphores in new code.
+- Use `vk` (Vulkan-Hpp wrappers) or custom wrappers; never leave raw handles without a destructor.
+- Synchronize CPU/GPU using timeline semaphores; avoid binary semaphores when it's possible but feel free to use them.
 
 ---
 
