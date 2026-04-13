@@ -335,27 +335,35 @@ void SubmitRenderPacket(RenderPacket packet);
 
 ## 14. Vulkan-Specific Guidelines
 
-- Prefix all Vulkan handles stored as members with `m_vk` to distinguish them.
-
+- Name the central vulkan object of the class handle
 ```cpp
-VkDevice         m_vkDevice     = VK_NULL_HANDLE;
-VkCommandPool    m_vkCmdPool    = VK_NULL_HANDLE;
+class VulkanDevice : 
+vk::Device         m_handle     = VK_NULL_HANDLE;
+
+class VulkanCommandPool : 
+vk::CommandPool    m_handle    = VK_NULL_HANDLE;
 ```
 
+- For any other vulkan object juste give it an explicit name
+```cpp
+class VulkanDevice : 
+vk::Queue         m_queue     = VK_NULL_HANDLE;
+```
+  
 - Always check Vulkan return codes; use a `VK_CHECK_RESULT` & `VK_CHECK_VOID` macro.
 
 ```cpp
-#define VK_CHECK_RESULT(func, expr)                                                   \
+#define VK_CHECK_RESULT(func, msg)                                                   \
     do {                                                                 \
         auto _res = (func);                                          \
-        KE_ASSERT_MSG(_res.result == vk::Result::eSucess, "Vulkan error: {}", expr);    \
+        KE_ASSERT_MSG(_res.result == vk::Result::eSucess, "Vulkan error: {}", msg);    \
         return _res.value  \
     } while (false)
 
-#define VK_CHECK_void(func, expr)                                                   \
+#define VK_CHECK_VOID(func, msg)                                                   \
     do {                                                                 \
         auto _res = (func);                                          \
-        KE_ASSERT_MSG(_res.result == vk::Result::eSucess, "Vulkan error: {}", expr);   \
+        KE_ASSERT_MSG(_res.result == vk::Result::eSucess, "Vulkan error: {}", msg);   \
     } while (false)
 ```
 
