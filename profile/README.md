@@ -16,7 +16,6 @@
 ## 🚀 Projects
 
 ### 🔧 [KEngine](https://github.com/Kayou-Corporation/KEngine)
-> The core 3D game engine.
 
 KEngine is our main project — a fully custom, 3D game engine written in modern C++23. It is designed with performance, modularity, and multi-API rendering in mind.
 
