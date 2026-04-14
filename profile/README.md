@@ -16,8 +16,7 @@
 ## 🚀 Projects
 
 ### 🔧 [KEngine](https://github.com/Kayou-Corporation/KEngine)
-
-KEngine is our main project — a fully custom, 3D game engine written in modern C++23. It is designed with performance, modularity, and multi-API rendering in mind.
+> Our main project — a fully custom, 3D game engine written in modern C++23. It is designed with performance, modularity, and multi-API rendering in mind.
 
 - **Rendering back-end:** Vulkan (DirectX 12 planned)
 - **Architecture:** Entity-Component-System (ECS)
@@ -26,9 +25,7 @@ KEngine is our main project — a fully custom, 3D game engine written in modern
 ---
 
 ### 🧵 [KThreads](https://github.com/Kayou-Corporation/KThreads)
-> Custom threading and task system.
-
-KThreads is our multi-threading layer built for deterministic, high-throughput workloads:
+> KThreads is our multi-threading layer built for deterministic, high-throughput workloads
 
 - Single thread management with polls of tasks
 - Thread pool management that can hold multiple queues, each with its own reserved threads
@@ -37,9 +34,7 @@ KThreads is our multi-threading layer built for deterministic, high-throughput w
 ---
 
 ### 🧠 [KAlloc](https://github.com/Kayou-Corporation/KAlloc)
-> Custom memory allocator library.
-
-KAlloc provides a suite of high-performance, low-level memory allocators tailored for real-time game engine workloads:
+> KAlloc provides a suite of high-performance, low-level memory allocators tailored for real-time game engine workloads
 
 - Based on C++23
 - Aligned allocations & allocator-specific strategies (linear, pool, stack)
