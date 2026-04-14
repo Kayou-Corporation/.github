@@ -31,10 +31,9 @@ KEngine is our main project — a fully custom, 3D game engine written in modern
 
 KThreads is our multi-threading layer built for deterministic, high-throughput workloads:
 
-- Lock-free job/task queue
-- Fiber-based coroutine support
-- Thread-affinity and priority management
-- Seamless integration with KEngine's frame scheduler
+- Single thread management with polls of tasks
+- Thread pool management that can hold multiple queues, each with its own reserved threads
+- Priority management for each queue of a pool, priorities being "High" or "Low"
 
 ---
 
