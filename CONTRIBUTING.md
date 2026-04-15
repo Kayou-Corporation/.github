@@ -26,13 +26,13 @@ By participating in any Kayou Corporation project you agree to treat all contrib
 ## Getting Started
 
 1. **Fork** the repository and clone your fork locally.
-2. Create a new branch off `main` for your change:
+2. Create a new branch off `master` for your change:
    ```bash
    git checkout -b feat/my-feature
    ```
 3. Make your changes, following the [Code Convention](CODE_CONVENTION.md).
 4. Build the project and ensure all tests pass before pushing.
-5. Open a pull request against the `main` branch.
+5. Open a pull request against the `master` branch.
 
 ---
 
@@ -86,7 +86,7 @@ We follow our own commits specification:
 [optional footer(s)]
 ```
 
-**Types:** `ADD`, `FIX`, `EDIT`, `REFACTOR`, `WIP`, `DONE`, `UPDATE`, `DOCS`
+**Types:** `ADD`, `FIX`, `EDIT`, `REFACTOR`, `WIP`, `DONE`, `UPDATE`, `DOCS`, `UPDATE`
 
 **Examples:**
 
